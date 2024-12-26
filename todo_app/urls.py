@@ -20,10 +20,12 @@ from django.urls import path , include
 from django.conf import settings # static file
 from django.conf.urls.static import static # static file
 from .views import index
+from django.views.i18n import JavaScriptCatalog
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('allauth.urls')),
   #  path('',index),
     path('', include('app.urls')),
+    path('jsi18n', JavaScriptCatalog.as_view(), name='js-catlog'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
