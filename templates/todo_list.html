@@ -6,23 +6,31 @@
     <!-- Iterate over object_list -->
 <br>
     <div class="container row gap-3">
+      
         {% for object in todo_list%}
     
         <!-- Display Objects -->
+        {% if object.user == user %}
         <div class="card" style="width: 18rem;">
             <div class=" card-body">
               <h5 class="card-title">{{ object.text }}</h5>
+              <h5 class="card-title">{{ object.user }}</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ object.deadline_at }}</h6>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <button type="button" class="btn btn-primary"><a href="{% url 'todo_update' object.id %}" class="card-link">Edit</a></button>
+              <button type="button" class="btn btn-danger"><a href="{% url 'todo_delete' object.id %}" class="card-link">Delete</a></button>
+
+             
             </div>
           </div>
-        
+          {% endif %}
         <!-- If object_list is empty  -->
         {% empty %}
         <li>No objects yet.</li>
         {% endfor %}
+        {% if not user.is_authenticated %}
+          <h1 class="text-center">you are not <a href="{%url 'account_login'%}">sign in</a></h1>
+          {% endif %}
     </div>
     
 
