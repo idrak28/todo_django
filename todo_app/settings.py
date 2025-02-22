@@ -62,6 +62,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
      # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
+    "app.middleware.ip_blacklist.IPblacklistMiddleware" ,
 ]
 
 ROOT_URLCONF = "todo_app.urls"
@@ -153,3 +154,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+BANNED_IPS =[
+    '127.0.0.1'
+]
